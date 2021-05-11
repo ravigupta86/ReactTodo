@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -35,4 +35,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.navigationColBorder {
+  border-right: 5px solid darkgray;
+}
+.navigationLink {
+  color: blue;
+  cursor: pointer;
+  list-style-type: none;
+}
+.navigationLink:hover {
+  font-weight: bold;
+}
+.selected {
+  background-color: darkgray;
+}
+
+.addToDoBox {
+  width: 100%;
+}
+
+.todoListHeader {
+  font-weight: bold;
+  margin: 10px 0 0 0;
+}
+.todoAction {
+  cursor: pointer;
+  color: blue;
+}
+.todoStatus {
+  text-transform: capitalize;
+}
+.todoRow:hover {
+  /* background-color: cyan; */
+  font-weight: bold;
 }
