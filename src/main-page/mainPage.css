@@ -64,10 +64,14 @@
   cursor: pointer;
   color: blue;
 }
+.todoAction img {
+  max-width: 16px;
+}
 .todoStatus {
   text-transform: capitalize;
 }
 .todoRow:hover {
-  /* background-color: cyan; */
-  font-weight: bold;
+  background-color: rgb(216, 216, 216);
+  /* font-weight: bold; */
+  /* border: 1px solid; */
 }

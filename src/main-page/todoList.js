@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import deleteIcon from '../assets/images/delete.png';
+import doneIcon from '../assets/images/done.png';
+import ongoingIcon from '../assets/images/ongoing.png';
 
 class todoList extends Component {    
-    actionTemplate = (todo, state) => {
+    actionTemplate = (todo, state, iconImg) => {
         var template =
             <div className="col-1 todoAction"
                 onClick={
@@ -9,7 +12,7 @@ class todoList extends Component {
                         todo.status = state;
                         this.props.updateTodo(todo);
                     }
-                }>{state}</div>;
+                }><img alt={state} className="actionIcon" src={iconImg} /> </div>;
         return template;
     }
 
@@ -28,9 +31,9 @@ class todoList extends Component {
                         <div key={todo.id} className="row todoRow">
                             <div className="col-2 todoStatus">{todo.status}</div>
                             <div className="col-7">{todo.text}</div>
-                            {this.actionTemplate(todo, 'done')}
-                            {this.actionTemplate(todo, 'ongoing')}
-                            {this.actionTemplate(todo, 'delete')}
+                            {this.actionTemplate(todo, 'done', doneIcon)}
+                            {this.actionTemplate(todo, 'ongoing', ongoingIcon)}
+                            {this.actionTemplate(todo, 'delete', deleteIcon)}
                         </div>
                     );
                 })
