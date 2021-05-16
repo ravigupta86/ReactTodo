@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Navigation = (props) => (
-  <React.Fragment>
+    <React.Fragment>
     {props.subtitle}
     <ul>
       <li className={"navigationLink " + (props.status === '' ? 'selected' : '')}

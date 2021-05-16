@@ -1,9 +1,10 @@
-import logo from './logo.svg';
+import logo from '../assets/images/logo.svg';
 import './mainPage.css';
-import Navigation from './navigation';
 import React, { Component } from 'react';
 import AddNewTodo from './addTodo';
 import TodoList from './todoList';
+import Navigation from './navigation';
+//import todoData from '../assets/toDo';
 
 //TODO: Use SFC in place of class components
 class App extends Component {
@@ -64,6 +65,8 @@ class App extends Component {
   }
 
   render() {
+    //const {id, text, status} = todoData[0];
+
     return (
       <div className="container">
         <div className="row">
