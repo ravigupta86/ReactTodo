@@ -35,13 +35,19 @@ function useTodos() {
         setStatus(filterStatus);
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         async function fetchData() {
             //artificial delay
-            await delay(1000);
-            let todos = await fetchToDos();
-            setAllTodo(todos);
-            setFilteredTodo(todos);
+            try {
+                await delay(1000);
+                let todos = await fetchToDos();
+                // throw "error while fetching todos";
+                setAllTodo(todos);
+                setFilteredTodo(todos);
+            } catch(err) { 
+                setAllTodo([]);
+                setFilteredTodo([]);
+            }
         }
         const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         fetchData();
