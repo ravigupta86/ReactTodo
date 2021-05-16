@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import deleteIcon from '../assets/images/delete.png';
 import doneIcon from '../assets/images/done.png';
 import ongoingIcon from '../assets/images/ongoing.png';

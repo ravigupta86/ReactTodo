@@ -1,7 +1,5 @@
-import React from 'react';
-
 const Navigation = (props) => (
-    <React.Fragment>
+    <>
     {props.subtitle}
     <ul>
       <li className={"navigationLink " + (props.status === '' ? 'selected' : '')}
@@ -13,7 +11,7 @@ const Navigation = (props) => (
       <li className={"navigationLink " + (props.status === 'new' ? 'selected' : '')}
         onClick={() => props.filterTodo('new')}>New</li>
     </ul>
-  </React.Fragment>
+  </>
 );
 
 export default Navigation;
