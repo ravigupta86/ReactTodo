@@ -1,92 +1,80 @@
 import logo from '../assets/images/logo.svg';
 import './mainPage.css';
-import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
 import AddNewTodo from './addTodo';
 import TodoList from './todoList';
 import Navigation from './navigation';
+import TodoSummary from './todoSummary';
 //import todoData from '../assets/toDo';
 
-//TODO: Use SFC in place of class components
-class App extends Component {
+function App(params) {
+  const [allToDo, setAllTodo] = useState([]);
+  const [filteredTodo, setFilteredTodo] = useState([]);
+  const [status, setStatus] = useState('');
 
-  constructor(props) {
-    super(props);
-
-    this.state = { allToDos: [], filteredTodos: [] };
-  }
-
-  //TODO: React.useeffect
-  async componentDidMount() {
-    var todos = await this.fetchToDos();
-    this.setState({
-      allToDos: todos,
-      filteredTodos: todos,
-      status: ''
-    });
-  }
-
-  async fetchToDos() {
+  async function fetchToDos() {
     const response = await fetch('/todo.json');
     return await response.json();
   }
 
   //TODO: Redux/useReducer/react hooks could avoid putting actions into parent
-  addNewTodo = (todo) => {
-    this.state.allToDos.push(todo);
-    this.filterTodo(this.state.status);
-    this.setState({
-      allToDos: this.state.allToDos
-    });
+  const addNewTodo = (todo) => {
+    var todos = allToDo;
+    todos.push(todo);
+    setAllTodo(todos);
+    filterTodo(status);
   }
 
-  updateTodo = (todo) => {
-    let todos = this.state.allToDos;
-    var index = todos.findIndex(t => t.id === todo.id);
+  const updateTodo = (todo) => {
+    var index = allToDo.findIndex(t => t.id === todo.id);
     if (todo.status === 'delete') {
-      todos.splice(index, 1);
+      allToDo.splice(index, 1);
     } else {
-      todos[index] = todo;
+      allToDo[index] = todo;
     }
-    this.filterTodo(this.state.status);
-    this.setState({
-      allToDos: todos
-    });
+    filterTodo(status);
+    setAllTodo(allToDo);
   }
 
-  filterTodo = (status) => {
-    let todos = this.state.allToDos;
-    if (status) {
-      todos = todos.filter(t => t.status === status);
-    }
-    this.setState({
-      filteredTodos: todos,
-      status: status
-    });
+  const filterTodo = (filterStatus) => {
+    let todos = allToDo.filter(t => !filterStatus || t.status === filterStatus);
+    setFilteredTodo(todos);
+    setStatus(filterStatus);
   }
 
-  render() {
-    //const {id, text, status} = todoData[0];
+  useEffect(() => {
+    async function fetchData() {
+      //artificial delay
+      await delay(1000);
+      let todos = await fetchToDos();
+      setAllTodo(todos);
+      setFilteredTodo(todos);
+    }
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    fetchData();
+  }, []);
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-3">
-            <img src={logo} className="App-logo mx-auto d-block" alt="logo" />
-          </div>
-          <div className="col-9 text-center font-weight-bold">ToDo App</div>
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-3">
+          <img src={logo} className="App-logo mx-auto d-block" alt="logo" />
         </div>
-        <div className="row">
-          <div className="col-3 navigationColBorder">
-            <Navigation subtitle="Navigation" filterTodo={this.filterTodo} status={this.state.status} />
-          </div>
-          <div className="col-9">
-            <AddNewTodo addNewTodo={this.addNewTodo} />
-            <TodoList todos={this.state.filteredTodos} updateTodo={this.updateTodo} />
-          </div>
+        <div className="col-9 text-center font-weight-bold">ToDo App</div>
+      </div>
+      <div className="row">
+        <div className="col-3 navigationColBorder">
+          <Navigation subtitle="Navigation" filterTodo={filterTodo} status={status} />
+          <TodoSummary allToDo={allToDo} />
+        </div>
+        <div className="col-9">
+          <AddNewTodo addNewTodo={addNewTodo} />
+          <TodoList todos={filteredTodo} updateTodo={updateTodo} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+
 }
 
 export default App;
