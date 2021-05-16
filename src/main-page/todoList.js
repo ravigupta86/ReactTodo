@@ -29,8 +29,8 @@ const TodoList = ({ todos, updateTodo }) => {
                     <div key={todo.id} className="row todoRow">
                         <div className="col-2 todoStatus">{todo.status}</div>
                         <div className="col-7">{todo.text}</div>
-                        {actionTemplate(todo, 'done', doneIcon, updateTodo)}
                         {actionTemplate(todo, 'ongoing', ongoingIcon, updateTodo)}
+                        {actionTemplate(todo, 'done', doneIcon, updateTodo)}
                         {actionTemplate(todo, 'delete', deleteIcon, updateTodo)}
                     </div>
                 );
