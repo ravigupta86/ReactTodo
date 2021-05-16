@@ -1,6 +1,6 @@
 const Navigation = (props) => (
     <>
-    {props.subtitle}
+    <h5>{props.subtitle}</h5>
     <ul>
       <li className={"navigationLink " + (props.status === '' ? 'selected' : '')}
         onClick={() => props.filterTodo('')}>All</li>

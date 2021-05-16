@@ -1,7 +1,8 @@
 const TodoSummary = (allTodo) => {
     return (
         <div>
-            Todo Count: {allTodo.allToDo.length}
+            <h5>Summary</h5>
+            <p>Todo Count: {allTodo.allToDo.length}</p>
         </div>
     );
 }
