@@ -27,15 +27,11 @@ jobs:
         npm run build --if-present
         npm run test --if-present
 
-    - name: 'Archive artifacts'
-      run: |
-        tar -czf todoApp_files.tar --exclude=todoApp_files.tar ./build/.
-
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: node-app
-        path: todoApp_files.tar
+        path: build
 
   deploy:
     runs-on: windows-latest
@@ -49,10 +45,6 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: node-app
-
-    - name: 'Uncompress artifacts'
-      run: |
-        tar -xf todoApp_files.tar
 
     - name: 'Deploy to Azure Web App'
       id: deploy-to-webapp
