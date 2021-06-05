@@ -28,7 +28,9 @@ jobs:
         npm run test --if-present
 
     - name: 'Archive Artifacts'
-      run: tar -cvf todoApp_files.tar ./
+      run: |
+        type nul > workspace.tar.gz
+        tar -czf workspace.tar.gz --exclude=workspace.tar.gz .
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
