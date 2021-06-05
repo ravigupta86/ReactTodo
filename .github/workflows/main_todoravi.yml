@@ -28,7 +28,7 @@ jobs:
         npm run test --if-present
 
     - name: 'Archive Artifacts'
-      run: tar -cvf todoApp_files.tar /
+      run: tar -cvf todoApp_files.tar *
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
