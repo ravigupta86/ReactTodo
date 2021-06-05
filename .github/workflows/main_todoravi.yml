@@ -29,7 +29,7 @@ jobs:
 
     - name: 'Archive artifacts'
       run: |
-        tar -czf todoApp_files.tar --exclude=todoApp_files.tar .
+        tar -czf todoApp_files.tar --exclude=todoApp_files.tar ./build
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
