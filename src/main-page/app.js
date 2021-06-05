@@ -17,7 +17,7 @@ function App(params) {
         <div className="col-3">
           <img src={logo} className="App-logo mx-auto d-block" alt="logo" />
         </div>
-        <div className="col-9 text-center font-weight-bold"><h1>ToDo App</h1></div>
+        <div className="col-9 text-center font-weight-bold"><h1>ToDo App - ReactJs</h1></div>
       </div>
       <div className="row">
         <div className="col-3 navigationColBorder">
